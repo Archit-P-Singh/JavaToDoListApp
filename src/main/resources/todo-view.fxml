@@ -5,15 +5,21 @@
 
 <VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/11.0"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.example.todolistapp.TodoController">
+      fx:controller="org.example.todolistapp.TodoController"
+      styleClass="root">
 
-    <TextField fx:id="taskField" promptText="Enter a new task" />
-    <Button text="Add Task" onAction="#addTask" />
+    <Label text="To-Do List" styleClass="title-label" />
 
-    <ListView fx:id="taskListView" prefHeight="200" />
-
-    <HBox spacing="10">
-        <Button text="Edit" onAction="#editTask" />
-        <Button text="Delete" onAction="#deleteTask" />
+    <HBox spacing="5" alignment="CENTER">
+        <TextField fx:id="taskField" promptText="Enter a new task..." styleClass="text-field"/>
+        <Button text="Add" onAction="#addTask" styleClass="button"/>
     </HBox>
+
+    <ListView fx:id="taskListView" prefHeight="200" styleClass="list-view"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Edit" onAction="#editTask" styleClass="button"/>
+        <Button text="Delete" onAction="#deleteTask" styleClass="button delete-button"/>
+    </HBox>
+
 </VBox>

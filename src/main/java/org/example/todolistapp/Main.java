@@ -11,6 +11,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/todo-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 400, 300);
+        scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         primaryStage.setTitle("To-Do List");
         primaryStage.setScene(scene);
         primaryStage.show();
