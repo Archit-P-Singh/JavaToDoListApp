@@ -40,9 +40,18 @@ public class TodoController {
     private void deleteTask() {
         int selectedIndex = taskListView.getSelectionModel().getSelectedIndex();
         if (selectedIndex != -1) {
-            taskListView.getItems().remove(selectedIndex);
+            String selectedTask = taskListView.getItems().get(selectedIndex); // Get task text
+
+            int taskId = DatabaseManager.getTaskId(selectedTask); // Get the correct task ID from DB
+            if (taskId != -1) {
+                DatabaseManager.deleteTask(taskId); // Delete from DB
+                taskListView.getItems().remove(selectedIndex); // Remove from UI
+            } else {
+                System.out.println("⚠ Task not found in database.");
+            }
         }
     }
+
 
     @FXML
     private void editTask() {

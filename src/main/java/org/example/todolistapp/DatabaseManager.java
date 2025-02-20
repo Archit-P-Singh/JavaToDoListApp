@@ -50,4 +50,45 @@ public class DatabaseManager{
             return null;
         }
     }
+
+    public static void deleteTask(int taskId) {
+        String sql = "DELETE FROM tasks WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, taskId); // Use actual task ID, not ListView index
+            int rowsAffected = stmt.executeUpdate(); // Execute the delete query
+
+            if (rowsAffected == 0) {
+                System.out.println("⚠ No task found with ID: " + taskId);
+            } else {
+                System.out.println("✅ Task deleted successfully!");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int getTaskId(String taskText) {
+        String sql = "SELECT id FROM tasks WHERE task = ? LIMIT 1";
+
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, taskText);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("id"); // Return the task ID
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return -1; // Return -1 if no task is found
+    }
+
 }
