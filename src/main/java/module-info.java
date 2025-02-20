@@ -7,6 +7,7 @@ module org.example.todolistapp {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires  java.dotenv;
 
     opens org.example.todolistapp to javafx.fxml;
     exports org.example.todolistapp;

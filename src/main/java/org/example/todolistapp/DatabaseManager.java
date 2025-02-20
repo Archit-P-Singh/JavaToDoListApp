@@ -1,11 +1,13 @@
 package org.example.todolistapp;
 
 import java.sql.*;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class DatabaseManager {
-    private static final String URL = "jdbc:mysql://localhost:3306/todo_db";
-    private static final String USER = "root";
-    private static final String PASSWORD = "Anohana@1"; // Replace with actual password
+    private static final Dotenv dotenv = Dotenv.load();
+    private static final String URL = dotenv.get("DB_URL");
+    private static final String USER = dotenv.get("DB_USER");
+    private static final String PASSWORD = dotenv.get("DB_PASSWORD");
 
     public static void initializeDatabase() {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -17,9 +19,11 @@ public class DatabaseManager {
                     "due_date DATE," +
                     "category VARCHAR(50)" +
                     ");";
-            stmt.execute(sql);
+            stmt.executeUpdate(sql);
+            System.out.println("✅ Database connected and table initialized.");
 
         } catch (SQLException e) {
+            System.out.println("❌ Database connection failed.");
             e.printStackTrace();
         }
     }

@@ -8,6 +8,7 @@ import javafx.scene.control.ComboBox;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class TodoController {
     @FXML private TextField taskField;
@@ -41,13 +42,14 @@ public class TodoController {
         }
     }
 
+
+
     // Load categories into ComboBox
     private void loadCategories() {
         categoryComboBox.getItems().addAll("Work", "Personal", "Urgent", "Other");
         categoryComboBox.getSelectionModel().select("Personal"); // Default category
     }
 
-    // Add task with due date & category
     @FXML
     private void addTask() {
         String task = taskField.getText();
@@ -55,13 +57,23 @@ public class TodoController {
         String category = categoryComboBox.getValue();
 
         if (!task.isEmpty()) {
-            String formattedDueDate = (dueDate != null) ? dueDate.toString() : null;
+            // If no due date is selected, use the current date
+            if (dueDate == null) {
+                dueDate = LocalDate.now();
+            }
+
+            String formattedDueDate = dueDate.toString(); // Convert to string format
             DatabaseManager.insertTask(task, formattedDueDate, category);
+
+            // Add formatted task details to ListView
             taskListView.getItems().add(task + " | Due: " + formattedDueDate + " | Category: " + category);
+
+            // Clear inputs after adding task
             taskField.clear();
             dueDatePicker.setValue(null);
         }
     }
+
 
 
 
