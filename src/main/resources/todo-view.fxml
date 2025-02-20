@@ -5,14 +5,15 @@
 
 <VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/11.0"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.example.todolistapp.TodoController"
-      styleClass="root">
+      fx:controller="org.example.todolistapp.TodoController">
 
-    <Label text="To-Do List" styleClass="title-label" />
+    <Label text="To-Do List" styleClass="title-label"/>
 
     <HBox spacing="5" alignment="CENTER">
         <TextField fx:id="taskField" promptText="Enter a new task..." styleClass="text-field"/>
-        <Button text="Add" onAction="#addTask" styleClass="button"/>
+        <DatePicker fx:id="dueDatePicker"/>
+        <ComboBox fx:id="categoryComboBox"/>
+        <Button text="Add Task" onAction="#addTask" styleClass="button"/>
     </HBox>
 
     <ListView fx:id="taskListView" prefHeight="200" styleClass="list-view"/>
