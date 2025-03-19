@@ -41,7 +41,8 @@ public class Main extends Application {
             }
         } catch (SQLException e) {
             System.out.println("❌ Database connection failed.");
-            System.exit(0);
+            System.exit(-1);
+            //System.out.println("Opening in offline mode.");
         }
     }
 }
