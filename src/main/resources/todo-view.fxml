@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/11.0"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.todolistapp.TodoController">
+
+    <Label text="To-Do List" styleClass="title-label"/>
+
+    <HBox spacing="5" alignment="CENTER">
+        <TextField fx:id="taskField" promptText="Enter a new task..." styleClass="text-field"/>
+        <DatePicker fx:id="dueDatePicker"/>
+        <ComboBox fx:id="categoryComboBox"/>
+        <Button text="Add Task" onAction="#addTask" styleClass="button"/>
+    </HBox>
+
+    <ListView fx:id="taskListView" prefHeight="200" styleClass="list-view"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Edit" onAction="#editTask" styleClass="button"/>
+        <Button text="Delete" onAction="#deleteTask" styleClass="button delete-button"/>
+    </HBox>
+
+</VBox>
